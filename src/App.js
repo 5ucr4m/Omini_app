@@ -1,20 +1,16 @@
-import './config/ReactoTronConfig';
-import './config/StatusBarConfig';
-
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 
-import store from './store';
 import Routes from './routes';
+import NavigationService from './services/navigation';
 
-export default class App extends Component {
-  componentDidMount() {}
+class App extends Component {
+  registerService = ref => {
+    NavigationService.setTopLevelNavigator(ref);
+  };
 
   render() {
-    return (
-      <Provider store={store}>
-        <Routes />
-      </Provider>
-    );
+    return <Routes ref={this.registerService} />;
   }
 }
+
+export default App;
