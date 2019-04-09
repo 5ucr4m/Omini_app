@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
   display: flex;
@@ -13,10 +14,9 @@ export const Label = styled.Text`
 `;
 
 export const InputField = styled.TextInput.attrs({
-  placeholderTextColor: '#fff',
+  placeholderTextColor: colors.placeHolderText,
 })`
   font-size: 20px;
   margin: 7px 0 17px;
   color: #fff;
-  opacity: 0.7;
 `;

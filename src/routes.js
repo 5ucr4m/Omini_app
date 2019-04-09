@@ -14,14 +14,14 @@ import ButtonIcon from './components/ButtonIcon';
 
 const Routes = createStackNavigator(
   {
+    SignIn,
+    SignUp,
     Dashboard,
     NewMeetup,
-    SignIn,
     Search,
     Meetup,
     Profile,
     Preferences,
-    SignUp,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

@@ -17,7 +17,7 @@ export const PreferenceItem = styled.View`
   margin-bottom: 15px;
 `;
 export const CheckBoxItem = styled.TouchableOpacity`
-  background: #826565;
+  background: ${props => (props.marked ? '#e5556e' : '#826565')};
   width: 22px;
   height: 22px;
   border-radius: 5px;

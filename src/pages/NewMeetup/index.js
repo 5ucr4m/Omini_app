@@ -27,6 +27,7 @@ const NewMeetup = () => (
 
 NewMeetup.navigationOptions = {
   title: 'Novo meetup',
+  headerLeft: null,
 };
 
 export default NewMeetup;

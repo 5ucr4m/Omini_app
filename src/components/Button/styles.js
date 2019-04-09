@@ -7,6 +7,7 @@ export const Container = styled.TouchableOpacity`
   height: 50px;
   width: 100%;
   border-radius: 25px;
+  opacity: ${props => (props.loading ? 0.4 : 1)};
 `;
 
 export const ButtonText = styled.Text`

@@ -41,6 +41,7 @@ const Search = ({ navigation, meetups, selectMeetup }) => (
 
 Search.navigationOptions = {
   title: 'Busca',
+  headerLeft: null,
 };
 
 Search.propTypes = {

@@ -72,11 +72,12 @@ const Dashboard = ({ navigation, meetups, selectMeetup }) => (
 Dashboard.propTypes = {
   navigation: PropTypes.shape({}).isRequired,
   selectMeetup: PropTypes.func.isRequired,
-  meetups: PropTypes.arrayOf().isRequired,
+  meetups: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 Dashboard.navigationOptions = {
   title: 'Início',
+  headerLeft: null,
 };
 
 const mapStateToProps = state => ({
