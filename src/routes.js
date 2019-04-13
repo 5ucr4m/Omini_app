@@ -12,31 +12,34 @@ import NewMeetup from './pages/NewMeetup';
 
 import ButtonIcon from './components/ButtonIcon';
 
-const Routes = createStackNavigator(
-  {
-    SignIn,
-    SignUp,
-    Dashboard,
-    NewMeetup,
-    Search,
-    Meetup,
-    Profile,
-    Preferences,
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      title: 'Default',
-      headerStyle: {
-        backgroundColor: '#e5556e',
+export default function createNavigator(isLogged = false) {
+  return createAppContainer(
+    createStackNavigator(
+      {
+        SignIn,
+        SignUp,
+        Dashboard,
+        NewMeetup,
+        Search,
+        Meetup,
+        Profile,
+        Preferences,
       },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
+      {
+        initialRouteName: isLogged ? 'Dashboard' : 'SignIn',
+        defaultNavigationOptions: ({ navigation }) => ({
+          title: 'Default',
+          headerStyle: {
+            backgroundColor: '#e5556e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerRight: <ButtonIcon onPress={() => navigation.navigate('Profile')} />,
+          headerBackTitle: null,
+        }),
       },
-      headerRight: <ButtonIcon onPress={() => navigation.navigate('Profile')} />,
-      headerBackTitle: null,
-    }),
-  },
-);
-
-export default createAppContainer(Routes);
+    ),
+  );
+}

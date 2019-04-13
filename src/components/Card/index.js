@@ -30,10 +30,14 @@ const Card = ({
 );
 
 Card.propTypes = {
-  source: PropTypes.string.isRequired,
+  source: PropTypes.string,
   title: PropTypes.string.isRequired,
   members: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
+};
+
+Card.defaultProps = {
+  source: 'http://fajrpolymers.com/wp-content/uploads/2018/02/dummy.png',
 };
 
 export default Card;

@@ -6,23 +6,33 @@ import { bindActionCreators } from 'redux';
 import Card from '../../components/Card';
 import TabBar from '../../components/TabBar';
 import {
-  Container, Content, HorizontalContent, Label, CardContainer,
+  Container,
+  Content,
+  HorizontalContent,
+  Label,
+  CardContainer,
 } from './styles';
 
-import meetupActions from '../../store/ducks/meetups';
+import meetupActions from '../../store/ducks/meetup';
 
-const Dashboard = ({ navigation, meetups, selectMeetup }) => (
+const Dashboard = ({
+  navigation,
+  meetups,
+  subscriptions,
+  recommendation,
+  selectMeetup,
+}) => (
   <Fragment>
     <Container>
       <Content>
         <Label>Inscrições</Label>
         <HorizontalContent>
-          {meetups.map(meetup => (
-            <CardContainer key={meetup.title}>
+          {subscriptions.map(meetup => (
+            <CardContainer key={meetup.id}>
               <Card
                 title={meetup.title}
                 members={meetup.members}
-                source={meetup.source}
+                source={meetup.image_url}
                 onPress={() => {
                   selectMeetup(meetup);
                   navigation.navigate('Meetup', { title: meetup.title });
@@ -34,11 +44,11 @@ const Dashboard = ({ navigation, meetups, selectMeetup }) => (
         <Label>Próximos Meetups</Label>
         <HorizontalContent>
           {meetups.map(meetup => (
-            <CardContainer key={meetup.title}>
+            <CardContainer key={meetup.id}>
               <Card
                 title={meetup.title}
                 members={meetup.members}
-                source={meetup.source}
+                source={meetup.image_url}
                 onPress={() => {
                   selectMeetup(meetup);
                   navigation.navigate('Meetup', { title: meetup.title });
@@ -49,12 +59,12 @@ const Dashboard = ({ navigation, meetups, selectMeetup }) => (
         </HorizontalContent>
         <Label>Recomendados</Label>
         <HorizontalContent>
-          {meetups.map(meetup => (
-            <CardContainer key={meetup.title}>
+          {recommendation.map(({ meetup }) => (
+            <CardContainer key={meetup.id}>
               <Card
                 title={meetup.title}
                 members={meetup.members}
-                source={meetup.source}
+                source={meetup.image_url}
                 onPress={() => {
                   selectMeetup(meetup);
                   navigation.navigate('Meetup', { title: meetup.title });
@@ -73,6 +83,8 @@ Dashboard.propTypes = {
   navigation: PropTypes.shape({}).isRequired,
   selectMeetup: PropTypes.func.isRequired,
   meetups: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  subscriptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  recommendation: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 Dashboard.navigationOptions = {
@@ -81,7 +93,9 @@ Dashboard.navigationOptions = {
 };
 
 const mapStateToProps = state => ({
-  meetups: state.meetups.data,
+  subscriptions: state.meetups.data.subscription,
+  meetups: state.meetups.data.meetups,
+  recommendation: state.meetups.data.recommendation,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(meetupActions, dispatch);

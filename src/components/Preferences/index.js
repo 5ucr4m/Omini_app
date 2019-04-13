@@ -2,22 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
 import PreferencesActions from '../../store/ducks/preferences';
 
 import {
-  Container, Title, PreferenceItem, CheckBoxItem, PreferenceTitle,
+  Container,
+  Title,
+  PreferenceItem,
+  CheckBoxItem,
+  PreferenceTitle,
 } from './styles';
 
 class Preferences extends Component {
   componentDidMount() {
-    const { PreferencesRequest } = this.props;
-    PreferencesRequest();
+    const { initUserPreferences, ResetPreferences } = this.props;
+    const init = initUserPreferences || [];
+    ResetPreferences(init);
   }
 
   render() {
     const {
-      preferences, title, userPreferences, OnChangePreferences,
+      preferences,
+      title,
+      selectedPreferences,
+      OnChangePreferences,
     } = this.props;
     return (
       <Container>
@@ -25,7 +32,7 @@ class Preferences extends Component {
         {preferences.map(preference => (
           <PreferenceItem key={preference.id}>
             <CheckBoxItem
-              marked={!!userPreferences.includes(preference.id)}
+              marked={!!selectedPreferences.includes(preference.id)}
               onPress={() => OnChangePreferences(preference.id)}
             />
             <PreferenceTitle>{preference.description}</PreferenceTitle>
@@ -44,8 +51,9 @@ Preferences.propTypes = {
     }),
   ).isRequired,
   OnChangePreferences: PropTypes.func.isRequired,
-  userPreferences: PropTypes.arrayOf(PropTypes.number).isRequired,
-  PreferencesRequest: PropTypes.func.isRequired,
+  selectedPreferences: PropTypes.arrayOf(PropTypes.number).isRequired,
+  ResetPreferences: PropTypes.func.isRequired,
+  initUserPreferences: PropTypes.arrayOf(PropTypes.number).isRequired,
   title: PropTypes.string,
 };
 
@@ -55,7 +63,7 @@ Preferences.defaultProps = {
 
 const mapStateToProps = state => ({
   preferences: state.preferences.list,
-  userPreferences: state.preferences.userPreferences,
+  selectedPreferences: state.preferences.selectedPreferences,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(PreferencesActions, dispatch);

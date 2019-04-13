@@ -7,7 +7,8 @@ const { Types, Creators } = createActions({
   authRequest: ['email', 'password'],
   authSuccess: ['token', 'user'],
   authFailure: ['error'],
-  updateUser: ['user'],
+  setToken: ['token'],
+  updateInfoSignedUser: ['user'],
 });
 
 export const AuthTypes = Types;
@@ -34,6 +35,7 @@ export const authSuccess = (state, { token, user }) => state.merge({
   user,
 });
 export const authFailure = (state, { error }) => state.merge({ error, loading: false });
+export const updateToken = (state, { token }) => state.merge({ token });
 export const updateUser = (state, { user }) => state.merge({ user });
 
 /* Reducers to types */
@@ -42,5 +44,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.AUTH_REQUEST]: authRequest,
   [Types.AUTH_SUCCESS]: authSuccess,
   [Types.AUTH_FAILURE]: authFailure,
-  [Types.UPDATE_USER]: updateUser,
+  [Types.SET_TOKEN]: updateToken,
+  [Types.UPDATE_INFO_SIGNED_USER]: updateUser,
 });

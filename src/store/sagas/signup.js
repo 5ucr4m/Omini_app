@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { Alert } from 'react-native';
 import api from '../../services/api';
 import NavigationService from '../../services/navigation';
 
@@ -16,6 +17,7 @@ export function* signUp({ name, email, password }) {
 
     NavigationService.navigate('Preferences');
   } catch (err) {
+    Alert.alert('Algo deu Errado...', 'Não foi possivel criar o usuário');
     yield put(SignUpActions.SignUpFailure('Não foi possivel criar o usuário'));
   }
 }

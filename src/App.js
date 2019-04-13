@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Routes from './routes';
+import createNavigator from './routes';
 import NavigationService from './services/navigation';
 
 class App extends Component {
@@ -9,8 +10,14 @@ class App extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    const Routes = createNavigator(auth.signedIn);
     return <Routes ref={this.registerService} />;
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(App);

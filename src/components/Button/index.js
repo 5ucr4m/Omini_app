@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ActivityIndicator } from 'react-native';
 
 import { Container, ButtonText } from './styles';
 
 const Button = ({ title, onPress, loading }) => (
-  <Container onPress={loading ? null : onPress} loading={loading}>
-    <ButtonText loading>{loading ? 'carregando...' : title}</ButtonText>
+  <Container onPress={loading ? null : onPress}>
+    {loading ? <ActivityIndicator size="small" color="#fff" /> : <ButtonText>{title}</ButtonText>}
   </Container>
 );
 

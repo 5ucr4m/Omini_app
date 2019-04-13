@@ -24,7 +24,7 @@ class SignUp extends Component {
     SignUpRequest(name, email, password);
   };
   render() {
-    const { navigation } = this.props;
+    const { navigation, signup } = this.props;
     const { name, email, password } = this.state;
     return (
       <Container>
@@ -46,7 +46,7 @@ class SignUp extends Component {
           value={password}
           onChangeText={text => this.setState({ password: text })}
         />
-        <Button title="Criar conta" onPress={this._handleSignUp} />
+        <Button title="Criar conta" onPress={this._handleSignUp} loading={signup.loading} />
         <NavLink text="Já tenho conta" onPress={() => navigation.navigate('SignIn')} />
       </Container>
     );

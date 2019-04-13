@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import ActionsAuth from '../../store/ducks/auth';
 
 import { Container } from './styles';
+
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import NavLink from '../../components/NavLink';

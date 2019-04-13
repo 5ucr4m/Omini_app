@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import meetupActions from '../../store/ducks/meetups';
+import meetupActions from '../../store/ducks/meetup';
 
 import Card from '../../components/Card';
 import TabBar from '../../components/TabBar';
 import {
-  Container, InputSearch, MeetupList, InputContainerSearch, InputIcon,
+  Container,
+  InputSearch,
+  MeetupList,
+  InputContainerSearch,
+  InputIcon,
 } from './styles';
 
 const Search = ({ navigation, meetups, selectMeetup }) => (
@@ -26,7 +30,7 @@ const Search = ({ navigation, meetups, selectMeetup }) => (
           <Card
             title={meetup.title}
             members={meetup.members}
-            source={meetup.source}
+            source={meetup.image_url}
             onPress={() => {
               selectMeetup(meetup);
               navigation.navigate('Meetup', { title: meetup.title });
@@ -53,7 +57,7 @@ Search.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  meetups: state.meetups.data,
+  meetups: state.meetups.data.meetups,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(meetupActions, dispatch);

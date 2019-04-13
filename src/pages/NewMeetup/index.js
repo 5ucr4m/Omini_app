@@ -7,8 +7,6 @@ import TabBar from '../../components/TabBar';
 import InputImage from '../../components/InputImage';
 import { Container, Content } from './styles';
 
-const preferencias = ['Font-end', 'Back-end', 'Mobile', 'DevOps', 'Gestão', 'Marketing'];
-
 const NewMeetup = () => (
   <Fragment>
     <Container>
@@ -16,8 +14,11 @@ const NewMeetup = () => (
         <Input label="Título" placeholder="Digite o título do meetup" />
         <Input label="Descrição" placeholder="Descreva seu meetup" />
         <InputImage />
-        <Input label="Localização" placeholder="Onde seu meetup irá acontecer?" />
-        <Preferences preferences={preferencias} title="Tema do meetup" />
+        <Input
+          label="Localização"
+          placeholder="Onde seu meetup irá acontecer?"
+        />
+        <Preferences title="Tema do meetup" />
         <Button title="Salvar" onPress={() => {}} />
       </Content>
     </Container>

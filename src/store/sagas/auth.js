@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import api from '../../services/api';
 import NavigationService from '../../services/navigation';
 
@@ -18,6 +19,9 @@ export function* login({ email, password }) {
 
     // Carrega as preferencias da resposta do usuário e passa para o duck de Preferences
     yield put(ActionsPreference.initPreferences(preferences));
+
+    yield AsyncStorage.setItem('@omini:token', JSON.stringify(token));
+    yield AsyncStorage.setItem('@omini:user', JSON.stringify(user));
 
     NavigationService.navigate('Dashboard');
   } catch (err) {

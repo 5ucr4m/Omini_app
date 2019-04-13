@@ -34,10 +34,10 @@ Preferences.navigationOptions = {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  preferences: state.preferences.userPreferences,
+  preferences: state.preferences.selectedPreferences,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...UserActions }, dispatch);
 
 export default connect(
   mapStateToProps,

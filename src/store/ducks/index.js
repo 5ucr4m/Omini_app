@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { reducer as meetupsReducer } from './meetups';
+import { reducer as meetupReducer } from './meetup';
 import { reducer as authReducer } from './auth';
 import { reducer as signUpReducer } from './signup';
 import { reducer as preferencesReducer } from './preferences';
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   signup: signUpReducer,
-  meetups: meetupsReducer,
+  meetups: meetupReducer,
   preferences: preferencesReducer,
 });
 
