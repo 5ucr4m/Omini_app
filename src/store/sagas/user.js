@@ -4,6 +4,8 @@ import api from '../../services/api';
 import NavigationService from '../../services/navigation';
 import ActionsPreference from '../ducks/preferences';
 
+import { meetupLoad } from './meetup';
+
 import AuthActions from '../ducks/auth';
 
 export function* updateUser({ user }) {
@@ -14,6 +16,7 @@ export function* updateUser({ user }) {
 
     yield put(AuthActions.updateInfoSignedUser(data.user));
     yield put(ActionsPreference.initPreferences(preferences));
+    yield meetupLoad();
 
     Alert.alert('Perfil', 'Suas informações foram atualizadas', [
       { text: 'OK', onPress: () => NavigationService.navigate('Dashboard') },

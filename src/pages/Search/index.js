@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,33 +15,60 @@ import {
   InputIcon,
 } from './styles';
 
-const Search = ({ navigation, meetups, selectMeetup }) => (
-  <Fragment>
-    <Container>
-      <InputContainerSearch>
-        <InputIcon name="search" />
-        <InputSearch placeholder="Buscar meetups" />
-      </InputContainerSearch>
+class Search extends Component {
+  state = {
+    search: '',
+    filtredMeetups: [],
+  };
 
-      <MeetupList
-        data={meetups}
-        keyExtractor={item => item.title}
-        renderItem={({ item: meetup }) => (
-          <Card
-            title={meetup.title}
-            members={meetup.members}
-            source={meetup.image_url}
-            onPress={() => {
-              selectMeetup(meetup);
-              navigation.navigate('Meetup', { title: meetup.title });
-            }}
+  componentDidMount() {
+    const { meetups } = this.props;
+    this.setState({ filtredMeetups: meetups });
+  }
+
+  _filter = search => {
+    const filtredMeetups = this.props.meetups.filter(item => {
+      return item.title.toUpperCase().indexOf(search.toUpperCase()) > -1;
+    });
+    this.setState({ search, filtredMeetups });
+  };
+
+  render() {
+    const { navigation, selectMeetup } = this.props;
+    const { filtredMeetups, search } = this.state;
+    return (
+      <Fragment>
+        <Container>
+          <InputContainerSearch>
+            <InputIcon name="search" />
+            <InputSearch
+              placeholder="Buscar meetups"
+              value={search}
+              onChangeText={this._filter}
+            />
+          </InputContainerSearch>
+
+          <MeetupList
+            data={filtredMeetups}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({ item: meetup }) => (
+              <Card
+                title={meetup.title}
+                members={meetup.subscriptions}
+                source={meetup.image_url}
+                onPress={() => {
+                  selectMeetup(meetup);
+                  navigation.navigate('Meetup', { title: meetup.title });
+                }}
+              />
+            )}
           />
-        )}
-      />
-    </Container>
-    <TabBar />
-  </Fragment>
-);
+        </Container>
+        <TabBar />
+      </Fragment>
+    );
+  }
+}
 
 Search.navigationOptions = {
   title: 'Busca',
@@ -60,7 +87,8 @@ const mapStateToProps = state => ({
   meetups: state.meetups.data.meetups,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(meetupActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(meetupActions, dispatch);
 
 export default connect(
   mapStateToProps,

@@ -4,6 +4,7 @@ import Immutable from 'seamless-immutable';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
+  newMeetupRequest: ['meetup'],
   meetupRequest: null,
   meetupSuccess: ['data'],
   subscriptionRequest: ['id'],

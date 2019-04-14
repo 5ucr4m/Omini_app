@@ -11,7 +11,7 @@ import { login } from './auth';
 import { signUp } from './signup';
 import { loadPreferences } from './preferences';
 import { updateUser } from './user';
-import { subscription } from './meetup';
+import { subscription, newMeetup } from './meetup';
 
 export default function* rootSaga() {
   yield init();
@@ -26,5 +26,6 @@ export default function* rootSaga() {
 
   yield all([takeLatest(UserTypes.USER_UPDATE_REQUEST, updateUser)]);
 
+  yield all([takeLatest(MeetupTypes.NEW_MEETUP_REQUEST, newMeetup)]);
   yield all([takeLatest(MeetupTypes.SUBSCRIPTION_REQUEST, subscription)]);
 }

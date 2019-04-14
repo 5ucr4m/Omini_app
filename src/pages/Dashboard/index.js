@@ -28,10 +28,10 @@ const Dashboard = ({
         <Label>Inscrições</Label>
         <HorizontalContent>
           {subscriptions.map(meetup => (
-            <CardContainer key={meetup.id}>
+            <CardContainer key={`subscription-${meetup.id}`}>
               <Card
                 title={meetup.title}
-                members={meetup.members}
+                members={meetup.subscriptions}
                 source={meetup.image_url}
                 onPress={() => {
                   selectMeetup(meetup);
@@ -44,10 +44,10 @@ const Dashboard = ({
         <Label>Próximos Meetups</Label>
         <HorizontalContent>
           {meetups.map(meetup => (
-            <CardContainer key={meetup.id}>
+            <CardContainer key={`next-${meetup.id}`}>
               <Card
                 title={meetup.title}
-                members={meetup.members}
+                members={meetup.subscriptions}
                 source={meetup.image_url}
                 onPress={() => {
                   selectMeetup(meetup);
@@ -59,11 +59,11 @@ const Dashboard = ({
         </HorizontalContent>
         <Label>Recomendados</Label>
         <HorizontalContent>
-          {recommendation.map(({ meetup }) => (
-            <CardContainer key={meetup.id}>
+          {recommendation.map(meetup => (
+            <CardContainer key={`recommendation-${meetup.id}`}>
               <Card
                 title={meetup.title}
-                members={meetup.members}
+                members={meetup.subscriptions}
                 source={meetup.image_url}
                 onPress={() => {
                   selectMeetup(meetup);

@@ -20,7 +20,9 @@ const Card = ({
     <ContentCard>
       <Description>
         <TitleCard>{title}</TitleCard>
-        <MembersCard>{members}</MembersCard>
+        <MembersCard>
+          {members === 1 ? '1 inscrito' : `${members} inscritos`}
+        </MembersCard>
       </Description>
       <Button onPress={onPress}>
         <Icon name="chevron-right" size={24} color="#fff" />
@@ -32,12 +34,13 @@ const Card = ({
 Card.propTypes = {
   source: PropTypes.string,
   title: PropTypes.string.isRequired,
-  members: PropTypes.string.isRequired,
+  members: PropTypes.string,
   onPress: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
   source: 'http://fajrpolymers.com/wp-content/uploads/2018/02/dummy.png',
+  members: 0,
 };
 
 export default Card;
