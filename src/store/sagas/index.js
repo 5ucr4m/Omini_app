@@ -5,12 +5,14 @@ import { SignupTypes } from '../ducks/signup';
 import { PreferencesTypes } from '../ducks/preferences';
 import { UserTypes } from '../ducks/user';
 import { MeetupTypes } from '../ducks/meetup';
+import { UploadTypes } from '../ducks/upload';
 
 import { init } from './init';
 import { login } from './auth';
 import { signUp } from './signup';
 import { loadPreferences } from './preferences';
 import { updateUser } from './user';
+import { uploadFile } from './upload';
 import { subscription, newMeetup } from './meetup';
 
 export default function* rootSaga() {
@@ -25,6 +27,8 @@ export default function* rootSaga() {
   ]);
 
   yield all([takeLatest(UserTypes.USER_UPDATE_REQUEST, updateUser)]);
+
+  yield all([takeLatest(UploadTypes.UPLOAD_REQUEST, uploadFile)]);
 
   yield all([takeLatest(MeetupTypes.NEW_MEETUP_REQUEST, newMeetup)]);
   yield all([takeLatest(MeetupTypes.SUBSCRIPTION_REQUEST, subscription)]);

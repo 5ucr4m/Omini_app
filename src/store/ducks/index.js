@@ -5,6 +5,7 @@ import { reducer as authReducer } from './auth';
 import { reducer as signUpReducer } from './signup';
 import { reducer as preferencesReducer } from './preferences';
 import { reducer as userReducer } from './user';
+import { reducer as uploadReducer } from './upload';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   signup: signUpReducer,
   meetups: meetupReducer,
   preferences: preferencesReducer,
+  upload: uploadReducer,
 });
 
 export default rootReducer;

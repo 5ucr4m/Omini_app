@@ -20,3 +20,13 @@ export const Input = styled.TouchableOpacity`
   padding: 30px;
   border-radius: 5px;
 `;
+
+export const ImageLoading = styled.ActivityIndicator.attrs({
+  size: 'small',
+  color: '#FFF',
+})`
+  justify-content: center;
+  flex: 1;
+  height: 120px;
+  border-radius: 5px;
+`;

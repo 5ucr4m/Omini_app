@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Image } from 'react-native';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -21,11 +22,12 @@ class NewMeetup extends Component {
 
   _handleSubmit = () => {
     const { title, description, place } = this.state;
-    const { subjects, newMeetupRequest } = this.props;
+    const { subjects, newMeetupRequest, image_url } = this.props;
     const data = {
       title,
       description,
       place,
+      image_url,
       subjects,
     };
     newMeetupRequest(data);
@@ -49,7 +51,15 @@ class NewMeetup extends Component {
               value={description}
               onChangeText={text => this.setState({ description: text })}
             />
-            <InputImage />
+            {!!this.props.image_url ? (
+              <Image
+                source={{ uri: this.props.image_url }}
+                style={{ height: 120, flex: 1 }}
+              />
+            ) : (
+              <InputImage />
+            )}
+
             <Input
               label="Localização"
               placeholder="Onde seu meetup irá acontecer?"
@@ -73,6 +83,7 @@ NewMeetup.navigationOptions = {
 
 const mapStateToProps = state => ({
   subjects: state.preferences.selectedPreferences,
+  image_url: state.upload.url,
 });
 
 const mapDispatchToProps = dispatch =>
